@@ -1,0 +1,21 @@
+.display-area {
+  background-color: rgb(240, 240, 240);
+  width: 40%;
+  margin: 1.5rem auto;
+  padding: 1rem;
+  border-radius: 5px;
+  border: 10px solid black;
+  box-shadow: 2px 2px 20px rgb(200, 150, 100);
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+.display-area p {
+  margin: 0;
+}
+
+.display-area blockquote {
+  padding: 0.7rem;
+  background-color: rgb(210, 210, 250);
+  border-radius: 5px;
+}

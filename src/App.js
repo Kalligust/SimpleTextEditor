@@ -1,23 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import { convertFromRaw } from "draft-js";
+import { stateToHTML } from "draft-js-export-html";
+
+import TextEditor from "./Components/TextEditor";
+import Display from "./Components/Display";
+
+import "./App.css";
 
 function App() {
+  const [notes, setNotes] = useState([]);
+
+  const submitHandler = (contentObject) => {
+    const rawContentState = JSON.parse(contentObject.text);
+    const ContentState = convertFromRaw(rawContentState);
+    const contentStateAsHtml = stateToHTML(ContentState);
+    setNotes((prev) => {
+      return [...prev, contentStateAsHtml];
+    });
+  };
+
+  console.log(notes);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className={"wrapper"}>
+      <TextEditor submitHandler={submitHandler} />
+      {notes.map((note) => (
+        <Display text={note} />
+      ))}
     </div>
   );
 }
